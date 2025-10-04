@@ -33,7 +33,20 @@ public class ClassCrudEmpleadoImp  implements IEmpleado{
 
 	@Override
 	public void actualizarEmpleado(TblEmpleado tblempleado) {
-		// TODO Auto-generated method stub
+		//establecemos conexion con la unidad de persistencia
+				EntityManagerFactory  conex=Persistence.createEntityManagerFactory("ProyectoMavenJpa2025");
+			//menejador de entidades segun unidad de persistencia....
+				EntityManager em=conex.createEntityManager();
+				//************realizamos el proceso.....
+				    //iniciar la transaccion...
+				em.getTransaction().begin();
+				    //registramos datos...
+				     //si fuera JDBC seria insert into tbl_empleado values......
+				em.merge(tblempleado);
+				//confirmamos
+				em.getTransaction().commit();
+				//cerramos
+				em.close();
 		
 	} //fin del metodo actualizar...
 
